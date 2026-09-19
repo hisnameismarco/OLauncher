@@ -31,14 +31,14 @@ Install from the public repository:
 omarchy plugin add https://github.com/hisnameismarco/OLauncher.git --enable
 ```
 
-For a local checkout, copy this repository to `~/.config/omarchy/plugins/marco.spotlight/`, then enable OLauncher in **Setup → Plugins**. Do not overwrite an existing installation without backing it up.
+For a local checkout, copy this repository to `~/.config/omarchy/plugins/OLauncher/`, then enable OLauncher in **Setup → Plugins**. Do not overwrite an existing installation without backing it up.
 
-The stable plugin ID is `marco.spotlight` for compatibility with earlier local installations; its displayed name is **OLauncher**.
+The plugin ID is `OLauncher`; its displayed name is **OLauncher**.
 
 Open it with:
 
 ```bash
-omarchy-shell shell toggle marco.spotlight '{}'
+omarchy-shell shell toggle OLauncher '{}'
 ```
 
 You can bind that command using Omarchy's keybinding configuration. Installation does not replace existing shortcuts or modify Hyprland configuration.
@@ -49,13 +49,17 @@ The launcher works without blur. For the frosted background, enable Hyprland blu
 
 ```lua
 hl.layer_rule({
-  match = { namespace = "^marco-spotlight$" },
+  match = { namespace = "^OLauncher$" },
   blur = true,
   ignore_alpha = 0.3,
 })
 ```
 
 Set `decoration.blur.enabled = true` in your existing `hl.config` settings block. This is a global compositor setting and also enables other configured blur rules. Validate configuration changes with `hyprctl reload` and `hyprctl configerrors`.
+
+## Upgrade from 2.1.x
+
+Version 2.2.0 changes the plugin ID from `marco.spotlight` to `OLauncher`. Back up your old installation, remove the old plugin with `omarchy plugin remove marco.spotlight`, then install OLauncher again using the command above. Update any launcher shortcut to the new ID and replace the old `marco-spotlight` blur namespace with `OLauncher`. Do not leave both versions enabled. The existing `spotlight-usage.json` file is deliberately retained so app rankings survive the rename.
 
 ## Controls
 
@@ -91,7 +95,7 @@ Precompiled Qt shader assets are included for installation. `qt6-shadertools` is
 ## Remove
 
 ```bash
-omarchy plugin remove marco.spotlight
+omarchy plugin remove OLauncher
 ```
 
 Remove any shortcut or blur rule you added yourself. The usage file is retained; remove it separately if desired. The plugin installs no background daemon or global configuration.

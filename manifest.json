@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "marco.spotlight",
+  "id": "OLauncher",
   "name": "OLauncher",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "author": "marco",
   "description": "A liquid app launcher with animated most-used apps, unified app/file search, calculator and contextual actions.",
   "kinds": [
