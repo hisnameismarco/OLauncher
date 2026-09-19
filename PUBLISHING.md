@@ -3,8 +3,8 @@
 Name: OLauncher
 Author: marco / hisnameismarco
 Repository: https://github.com/hisnameismarco/OLauncher
-Category: Launchers / Productivity (choose the closest category offered by the form)
-Tags: launcher, quickshell, search, apps, animation, productivity
+Category: Productivity
+Tags: Launcher, Quickshell, Hyprland
 License: GPL-3.0-only
 
 Description:
@@ -15,4 +15,4 @@ Before submitting, verify the install command in README on a clean Omarchy insta
 
 Publishing guide / submission form: https://plugins.omarchy.org/publish.html
 
-This repository is a prepared release candidate. It has been tested on the author's installed Omarchy system; a second clean installation and other display scales have not yet been verified. A preview image or short animation recording is optional and should show the launcher without personal data.
+This repository is a prepared release candidate. It has been tested on the author's installed Omarchy system; a second clean installation and other display scales have not yet been verified. The animation preview in `media/preview.gif` was recorded on an empty workspace without personal windows.

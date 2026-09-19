@@ -2,6 +2,8 @@
 
 A standalone Omarchy shell launcher with a liquid animation for your most-used apps, a unified local search and contextual actions. No Siri, cloud services or telemetry.
 
+![OLauncher: animated quick-launch app circles](media/preview.gif)
+
 ## Features
 
 - Press **Tab in an empty search**: up to four app circles flow out of the search field.
