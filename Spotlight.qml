@@ -34,7 +34,7 @@ Item {
   property int quickIndex: 0
   property real railProgress: quickOpen ? 1 : 0
   Behavior on railProgress { NumberAnimation { duration: 620; easing.type: Easing.Linear } }
-  readonly property string pluginId: root.manifest && root.manifest.id ? root.manifest.id : "OLauncher"
+  readonly property string pluginId: root.manifest && root.manifest.id ? root.manifest.id : "olauncher"
   readonly property var current: results[selected] || null
   readonly property bool commandMode: query.trim().charAt(0) === ">"
   readonly property bool expanded: query.trim().length > 0 || filter !== "all"
@@ -287,7 +287,7 @@ Item {
     visible: root.opened || root.windowProgress > 0
     anchors { top: true; bottom: true; left: true; right: true }
     color: "transparent"
-    WlrLayershell.namespace: "OLauncher"
+    WlrLayershell.namespace: "olauncher"
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.keyboardFocus: root.opened ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
     exclusionMode: ExclusionMode.Ignore

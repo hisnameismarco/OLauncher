@@ -33,14 +33,14 @@ Install from the public repository:
 omarchy plugin add https://github.com/hisnameismarco/OLauncher.git --enable
 ```
 
-For a local checkout, copy this repository to `~/.config/omarchy/plugins/OLauncher/`, then enable OLauncher in **Setup → Plugins**. Do not overwrite an existing installation without backing it up.
+For a local checkout, copy this repository to `~/.config/omarchy/plugins/olauncher/`, then enable OLauncher in **Setup → Plugins**. Do not overwrite an existing installation without backing it up.
 
-The plugin ID is `OLauncher`; its displayed name is **OLauncher**.
+The plugin ID is `olauncher`; its displayed name is **OLauncher**.
 
 Open it with:
 
 ```bash
-omarchy-shell shell toggle OLauncher '{}'
+omarchy-shell shell toggle olauncher '{}'
 ```
 
 You can bind that command using Omarchy's keybinding configuration. Installation does not replace existing shortcuts or modify Hyprland configuration.
@@ -51,7 +51,7 @@ The launcher works without blur. For the frosted background, enable Hyprland blu
 
 ```lua
 hl.layer_rule({
-  match = { namespace = "^OLauncher$" },
+  match = { namespace = "^olauncher$" },
   blur = true,
   ignore_alpha = 0.3,
 })
@@ -59,9 +59,11 @@ hl.layer_rule({
 
 Set `decoration.blur.enabled = true` in your existing `hl.config` settings block. This is a global compositor setting and also enables other configured blur rules. Validate configuration changes with `hyprctl reload` and `hyprctl configerrors`.
 
-## Upgrade from 2.1.x
+## Upgrade from 2.1.x / 2.2.0
 
-Version 2.2.0 changes the plugin ID from `marco.spotlight` to `OLauncher`. Back up your old installation, remove the old plugin with `omarchy plugin remove marco.spotlight`, then install OLauncher again using the command above. Update any launcher shortcut to the new ID and replace the old `marco-spotlight` blur namespace with `OLauncher`. Do not leave both versions enabled. The existing `spotlight-usage.json` file is deliberately retained so app rankings survive the rename.
+The marketplace requires lowercase community plugin IDs. Version 2.2.1 uses `olauncher`; the display name remains **OLauncher**. Earlier releases used `marco.spotlight` (2.1.x) or `OLauncher` (2.2.0).
+
+Back up the old installation, remove it with `omarchy plugin remove <old-id>`, then install OLauncher again using the command above. Update launcher shortcuts to `olauncher` and change the old blur namespace (`marco-spotlight` or `OLauncher`) to `olauncher`. Do not leave both versions enabled. The existing `spotlight-usage.json` file is retained so app rankings survive the rename.
 
 ## Controls
 
@@ -97,7 +99,7 @@ Precompiled Qt shader assets are included for installation. `qt6-shadertools` is
 ## Remove
 
 ```bash
-omarchy plugin remove OLauncher
+omarchy plugin remove olauncher
 ```
 
 Remove any shortcut or blur rule you added yourself. The usage file is retained; remove it separately if desired. The plugin installs no background daemon or global configuration.
