@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "marco.spotlight",
+  "name": "OLauncher",
+  "version": "2.1.0",
+  "author": "marco",
+  "description": "A liquid app launcher with animated most-used apps, unified app/file search, calculator and contextual actions.",
+  "kinds": [
+    "menu"
+  ],
+  "keepLoaded": true,
+  "entryPoints": {
+    "menu": "Spotlight.qml"
+  }
+}
