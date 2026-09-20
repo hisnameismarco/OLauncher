@@ -2,9 +2,9 @@
 
 READY FOR v1.0 RELEASE
 
-The approved feature set was originally reviewed under development version
-2.2.1 and is now named **1.0** at the maintainer's request. This changes release
-naming only; layout schema v2 and all behavior remain unchanged.
+The approved feature set is published as **1.0** at the maintainer's request.
+Release naming is independent of layout schema v2; all reviewed behavior
+remains unchanged.
 
 This document records the pre-publication review. Afterwards, the approved
 initial **Apps ▦** button correction made mouse clicks open the grid while
