@@ -1,8 +1,4 @@
-<p align="center">
-  <video src="https://github.com/hisnameismarco/OLauncher/raw/refs/heads/main/media/olauncher-v1.1.0-demo.mp4" poster="https://raw.githubusercontent.com/hisnameismarco/OLauncher/main/preview.png" autoplay loop muted playsinline width="960">
-    <a href="media/olauncher-v1.1.0-demo.mp4">Watch the OLauncher v1.1.0 demo</a>
-  </video>
-</p>
+<p align="center"><a href="media/olauncher-v1.1.0-demo.mp4"><img src="media/preview.gif" alt="OLauncher v1.1.0 demo — click for the full MP4" width="960"></a></p>
 
 # OLauncher
 
