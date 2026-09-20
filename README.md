@@ -4,7 +4,7 @@ A Spotlight-style launcher for Omarchy with unified app/file search, a calculato
 
 ![OLauncher demo: most-used apps, App Grid, folders, hidden apps and search](media/preview.gif)
 
-[Watch or download the v1.1.0 demo (MP4)](https://github.com/hisnameismarco/OLauncher/releases/download/v1.1.0/olauncher-v1.1.0-demo.mp4). Recorded with isolated demo data on a neutral background.
+[Watch or download the v1.1.0 demo (MP4)](media/olauncher-v1.1.0-demo.mp4). Recorded with isolated demo data on a neutral background. The same file is attached to the [v1.1.0 release](https://github.com/hisnameismarco/OLauncher/releases/tag/v1.1.0).
 
 ## Version 1.1.0
 
