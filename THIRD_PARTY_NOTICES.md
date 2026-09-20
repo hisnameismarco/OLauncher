@@ -16,3 +16,9 @@ Modifications for OLauncher: Omarchy integration, configurable surface propertie
 ## Host and system assets
 
 Quickshell, Qt and Omarchy are runtime dependencies, not vendored. Application icons and optional fonts are resolved from the user's system and are not included in this repository. No Apple artwork, fonts or macOS software is redistributed.
+
+## LaunchNow UX inspiration
+
+[LaunchNow](https://github.com/ggkevinnnn/LaunchNow) informed the app-grid and
+folder interaction concepts. OLauncher's implementation is independent QML and
+JavaScript; no LaunchNow Swift code, Apple assets or SF Symbols are included.
