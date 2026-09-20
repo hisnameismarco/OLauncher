@@ -1,3 +1,9 @@
+<p align="center">
+  <video src="https://github.com/hisnameismarco/OLauncher/raw/refs/heads/main/media/olauncher-v1.1.0-demo.mp4" poster="https://raw.githubusercontent.com/hisnameismarco/OLauncher/main/preview.png" autoplay loop muted playsinline width="960">
+    <a href="media/olauncher-v1.1.0-demo.mp4">Watch the OLauncher v1.1.0 demo</a>
+  </video>
+</p>
+
 # OLauncher
 
 A Spotlight-style launcher for Omarchy with unified app/file search, a calculator, animated most-used apps and a compact App Grid. Organize apps with drag-and-drop ordering, folders and reversible hiding, using the mouse or keyboard. No cloud services or telemetry.
