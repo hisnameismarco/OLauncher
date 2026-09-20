@@ -1,6 +1,10 @@
-# OLauncher v2.2.1 release review — 2026-09-20
+# OLauncher v1.0 release review — 2026-09-20
 
-READY FOR v2.2.1 RELEASE
+READY FOR v1.0 RELEASE
+
+The approved feature set was originally reviewed under development version
+2.2.1 and is now named **1.0** at the maintainer's request. This changes release
+naming only; layout schema v2 and all behavior remain unchanged.
 
 This document records the pre-publication review. Afterwards, the approved
 initial **Apps ▦** button correction made mouse clicks open the grid while
@@ -33,10 +37,10 @@ not changed. ODock and ONotifications were not modified.
 | 16. QML tests | 28 interaction tests passed; Qt reports 34 passes including six setup/cleanup cases. |
 | 17. Real-store tests | All 15 passed. Four new clean-install integration tests also passed, with no skips. |
 | 18. Other validation | Python search test, plugin validation of checkout and installed snapshot, and whitespace checks passed. |
-| 19. Version | Manifest and current-release documentation consistently use 2.2.1. References to 2.1.x/2.2.0 describe upgrade history. Version unchanged; no remote tags were listed at review time. |
+| 19. Version | Manifest and current-release documentation consistently use 1.0. The maintainer selected 1.0 as the public version after review. Earlier development numbering does not change the layout schema or plugin ID. |
 | 20. Licensing | GPL-3.0-only declarations and GPLv3 license remain present. StatIndet provenance and modified shader source are documented. No Swift, SF Symbols, Apple assets or copied LaunchNow implementation found. Added explicit UX-inspiration notice. |
 | 21. Non-blocking limitations | See the test boundaries below. No UI redesign, architectural refactor or new feature was introduced. |
-| 22. Conclusion | READY FOR v2.2.1 RELEASE |
+| 22. Conclusion | READY FOR v1.0 RELEASE |
 
 The regression fixture installs `review-suffix.desktop.desktop`, obtains
 `review-suffix.desktop` from the actual Quickshell catalog and checks the launch

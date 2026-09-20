@@ -4,7 +4,7 @@ A Spotlight-style launcher for Omarchy with unified app/file search, a calculato
 
 ![OLauncher demo: most-used apps, App Grid, folders, hidden apps and search](media/preview.gif)
 
-[Watch or download the 26-second demo (MP4)](https://github.com/hisnameismarco/OLauncher/releases/download/v2.2.1/olauncher-v2.2.1-demo.mp4). Recorded with isolated demo data on a neutral background.
+[Watch or download the 26-second demo (MP4)](https://github.com/hisnameismarco/OLauncher/releases/download/v1.0/olauncher-v1.0-demo.mp4). Recorded with isolated demo data on a neutral background.
 
 ## Features
 
@@ -63,9 +63,9 @@ hl.layer_rule({
 
 Set `decoration.blur.enabled = true` in your existing `hl.config` settings block. This is a global compositor setting and also enables other configured blur rules. Validate configuration changes with `hyprctl reload` and `hyprctl configerrors`.
 
-## Upgrade from 2.1.x / 2.2.0
+## Migration from earlier development builds
 
-The marketplace requires lowercase community plugin IDs. Version 2.2.1 uses `olauncher`; the display name remains **OLauncher**. Earlier releases used `marco.spotlight` (2.1.x) or `OLauncher` (2.2.0).
+The marketplace requires lowercase community plugin IDs. Version 1.0 uses `olauncher`; the display name remains **OLauncher**. Earlier development builds used `marco.spotlight` or `OLauncher` as the plugin ID.
 
 Back up the old installation, remove it with `omarchy plugin remove <old-id>`, then install OLauncher again using the command above. Update launcher shortcuts to `olauncher` and change the old blur namespace (`marco-spotlight` or `OLauncher`) to `olauncher`. Do not leave both versions enabled. The existing `spotlight-usage.json` file is retained so app rankings survive the rename.
 
