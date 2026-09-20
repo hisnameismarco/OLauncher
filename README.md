@@ -1,8 +1,10 @@
 # OLauncher
 
-A standalone Omarchy shell launcher with a liquid animation for your most-used apps, a unified local search and contextual actions. No Siri, cloud services or telemetry.
+A Spotlight-style launcher for Omarchy with unified app/file search, a calculator, animated most-used apps and a compact App Grid. Organize apps with drag-and-drop ordering, folders and reversible hiding, using the mouse or keyboard. No cloud services or telemetry.
 
-![OLauncher: animated quick-launch app circles](media/preview.gif)
+![OLauncher demo: most-used apps, App Grid, folders, hidden apps and search](media/preview.gif)
+
+[Watch or download the 26-second demo (MP4)](https://github.com/hisnameismarco/OLauncher/releases/download/v2.2.1/olauncher-v2.2.1-demo.mp4). Recorded with isolated demo data on a neutral background.
 
 ## Features
 
