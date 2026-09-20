@@ -60,8 +60,8 @@ void main()
     float alpha = 1.0 - smoothstep(-aa * 0.5, aa * 0.5, surface);
     // Frosted body and a continuous rim, including during the liquid morph.
     float vertical = clamp((pixel.y - ubuf.mainShape.y) / ubuf.mainShape.w + 0.5, 0.0, 1.0);
-    vec3 body = ubuf.fillColor.rgb + vec3(0.035 * (1.0 - vertical));
+    vec3 body = mix(ubuf.fillColor.rgb, vec3(1.0), 0.08 * max(0.0, 1.0 - vertical * 2.0));
     float rim = 1.0 - smoothstep(0.3, 1.3, abs(surface + 0.7));
-    body = mix(body, vec3(1.0), rim * mix(0.7, 0.25, vertical));
+    body = mix(body, vec3(1.0), rim * mix(0.30, 0.14, vertical));
     fragColor = vec4(body, 1.0) * alpha * ubuf.qt_Opacity;
 }

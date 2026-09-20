@@ -22,7 +22,8 @@ Item {
   readonly property color quiet: Visual.alpha(ink,0.07)
   readonly property color secondary: Visual.alpha(ink,0.68)
   readonly property color selection: Visual.alpha(ink,0.13)
-  readonly property string uiFont: Style.font.resolvedFamily
+  readonly property string uiFont: "sans-serif"
+  readonly property string monoFont: Style.font.resolvedFamily
   property bool opened: false
   property string query: ""
   property string filter: "all"
@@ -65,16 +66,16 @@ Item {
   readonly property bool commandMode: query.trim().charAt(0) === ">"
   readonly property bool expanded: query.trim().length > 0 || filter !== "all"
   readonly property var actions: current ? (current.kind === "folder"
-    ? [{key:"open",label:"Öffnen"},{key:"rename",label:"Umbenennen"},{key:"deleteFolder",label:"Ordner auflösen"}]
+    ? [{key:"open",label:"Open"},{key:"rename",label:"Rename"},{key:"deleteFolder",label:"Dissolve folder"}]
     : openFolder && gridActive
-    ? [{key:"open",label:"Öffnen"},{key:"removeFromFolder",label:"Aus Ordner entfernen"},{key:"hide",label:"Aus OLauncher ausblenden"}]
+    ? [{key:"open",label:"Open"},{key:"removeFromFolder",label:"Remove from folder"},{key:"hide",label:"Hide from OLauncher"}]
     : current.kind === "app"
-    ? [{key:"open",label:"Öffnen"},{key:"copy",label:"Name kopieren"},{key:"hide",label:"Aus OLauncher ausblenden"}]
+    ? [{key:"open",label:"Open"},{key:"copy",label:"Copy name"},{key:"hide",label:"Hide from OLauncher"}]
     : current.kind === "file"
-    ? [{key:"open", label:"Öffnen"}, {key:"folder", label:"Ordner öffnen"}, {key:"copy", label:"Pfad kopieren"}]
-    : [{key:"open", label:current.kind === "calc" ? "Ergebnis kopieren" : current.kind === "cmd" ? "Befehl ausführen" : "Öffnen"},
-       {key:"copy", label:current.kind === "app" ? "Name kopieren" : current.kind === "cmd" ? "Befehl kopieren" : "Ergebnis kopieren"}]) : []
-  readonly property var filters: [{key:"all",label:"Alle"}, {key:"app",label:"Apps"}, {key:"file",label:"Dateien"}, {key:"calc",label:"Rechner"}]
+    ? [{key:"open", label:"Open"}, {key:"folder", label:"Open folder"}, {key:"copy", label:"Copy path"}]
+    : [{key:"open", label:current.kind === "calc" ? "Copy result" : current.kind === "cmd" ? "Run command" : "Open"},
+       {key:"copy", label:current.kind === "app" ? "Copy name" : current.kind === "cmd" ? "Copy command" : "Copy result"}]) : []
+  readonly property var filters: [{key:"all",label:"All"}, {key:"app",label:"Apps"}, {key:"file",label:"Files"}, {key:"calc",label:"Calculator"}]
   property real windowProgress: opened ? 1 : 0
   Behavior on windowProgress { NumberAnimation { duration: root.opened ? 210 : 160; easing.type: Easing.OutCubic } }
 
@@ -265,7 +266,7 @@ Item {
     if (t.indexOf("%") >= 0) return null
     try {
       var v = Function('"use strict";return (' + t + ')')()
-      return typeof v === "number" && isFinite(v) ? String(Number(v.toPrecision(12))).replace(".", ",") : null
+      return typeof v === "number" && isFinite(v) ? String(Number(v.toPrecision(12))) : null
     } catch (e) { return null }
   }
   function appResults(q, unlimited) {
@@ -280,7 +281,7 @@ Item {
       var title = root.appLibrary ? root.appLibrary.entryName(e) : String(e.name || id)
       var name = title.toLowerCase(), needle = q.toLowerCase()
       var match = !needle ? 0 : name === needle ? 300 : name.indexOf(needle) === 0 ? 200 : name.indexOf(needle) >= 0 ? 100 : 0
-      out.push({kind:"app",appId:id,title:title,subtitle:root.appLibrary ? root.appLibrary.entrySubtext(e) || "Programm" : "Programm",
+      out.push({kind:"app",appId:id,title:title,subtitle:root.appLibrary ? root.appLibrary.entrySubtext(e) || "Application" : "Application",
         icon:root.appLibrary ? root.appLibrary.iconSource(e.icon) : iconOr(e.icon),score:match + Math.min(50, Number(root.usage[id] || 0) * 3),order:i})
     }
     out.sort(function(a,b) { return b.score - a.score || a.order - b.order })
@@ -332,7 +333,7 @@ Item {
     var q = root.query.trim(), out = []
     if (q.charAt(0) === ">") {
       var cmd = q.slice(1).trim()
-      if (cmd) out.push({kind:"cmd",title:cmd,subtitle:"Shell-Befehl · Enter zum Ausführen",icon:iconOr("utilities-terminal")})
+      if (cmd) out.push({kind:"cmd",title:cmd,subtitle:"Shell command · Enter to run",icon:iconOr("utilities-terminal")})
     } else {
       var value = calculate(q)
       if (value !== null) out.push({kind:"calc",title:value,subtitle:q + " =",icon:iconOr("accessories-calculator")})
@@ -527,28 +528,28 @@ Item {
         anchors.fill: parent
         visible: root.expanded
         radius: Visual.radiusOuter
-        // A substantial theme tint keeps text readable without compositor blur.
-        color: Visual.alpha(root.material,0.94)
+        // Frosted material shared with the dock, denser for text readability.
+        color: Visual.alpha(root.material,Visual.surfaceOpacity)
         border.width: 1
-        border.color: Visual.alpha(root.ink,0.16)
+        border.color: Visual.alpha(root.ink,Visual.edgeOpacity)
         Rectangle {
           anchors.fill: parent; radius: parent.radius
           gradient: Gradient {
-            GradientStop { position: 0; color: "#14ffffff" }
-            GradientStop { position: 0.45; color: "#00ffffff" }
+            GradientStop { position: 0; color: Visual.alpha("#ffffff",Visual.sheenOpacity) }
+            GradientStop { position: 0.5; color: "#00ffffff" }
             GradientStop { position: 1; color: "#09000000" }
           }
         }
         Rectangle {
           x: parent.radius; y: 1; width: parent.width - 2 * x; height: 1
-          color: "#24ffffff"
+          color: Visual.alpha("#ffffff",0.16)
         }
         layer.enabled: true
         layer.effect: MultiEffect {
           shadowEnabled: true
-          shadowColor: "#38000000"
-          shadowBlur: 0.65
-          shadowVerticalOffset: 8
+          shadowColor: Visual.shadowColor
+          shadowBlur: Visual.shadowBlur
+          shadowVerticalOffset: Visual.shadowOffset
         }
       }
       MorphSurface {
@@ -562,13 +563,15 @@ Item {
         expandedMainWidth: surface.width - root.quickApps.length * (buttonDiameter + buttonGap)
         shapeCenterY: 51
         shapeHeight: 66
-        mainCornerRadius: 28
+        mainCornerRadius: Visual.radiusOuter
         buttonCount: root.quickApps.length
         buttonDiameter: Math.min(64, Math.max(28, (surface.width - 180) / 4 - 10))
         buttonGap: 10
         blurEdgeInset: 2
-        surfaceColor: Visual.alpha(root.material,0.94)
-        shadowColor: "#40000000"
+        surfaceColor: Visual.alpha(root.material,Visual.surfaceOpacity)
+        shadowColor: Visual.shadowColor
+        shadowBlur: Visual.shadowBlur
+        shadowVerticalOffset: Visual.shadowOffset
       }
       MouseArea { anchors.fill: parent }
       Canvas {
@@ -601,7 +604,7 @@ Item {
         color: root.ink
         selectionColor: Visual.alpha(Color.accent,0.35)
         selectedTextColor: root.ink
-        font.family: root.uiFont
+        font.family: root.commandMode ? root.monoFont : root.uiFont
         font.pixelSize: 24
         text: root.query
         onTextChanged: root.query = text
@@ -610,7 +613,7 @@ Item {
         Label {
           anchors.verticalCenter: parent.verticalCenter
           width: parent.width
-          text: "Spotlight-Suche"
+          text: "Spotlight Search"
           color: root.secondary
           font.pixelSize: 24
           visible: !input.text.length
@@ -692,7 +695,7 @@ Item {
           id: filtersRow
           x: 8; y: 8; spacing: 5; height: 32
           Repeater {
-            model: root.commandMode ? [{key:"all",label:"Befehl"}] : root.filters
+            model: root.commandMode ? [{key:"all",label:"Command"}] : root.filters
             delegate: Rectangle {
               required property var modelData
               width: chipLabel.implicitWidth + (surface.width < 360 ? 16 : 24); height: 26; radius: Visual.radiusControl
@@ -786,7 +789,7 @@ Item {
               Column {
                 x: 56; anchors.verticalCenter: parent.verticalCenter
                 width: parent.width - 104; spacing: 3
-                Label { width: parent.width; text: row.modelData.title; font.pixelSize: row.modelData.kind === "calc" ? 22 : 15 }
+                Label { width: parent.width; text: row.modelData.title; font.family: row.modelData.kind === "cmd" ? root.monoFont : root.uiFont; font.pixelSize: row.modelData.kind === "calc" ? 22 : 15 }
                 Label { width: parent.width; text: row.modelData.subtitle; font.pixelSize: 12; color: root.secondary }
               }
               Label { anchors.right: parent.right; anchors.rightMargin: 15; anchors.verticalCenter: parent.verticalCenter; text: "↵"; font.pixelSize: 19; visible: row.index === root.selected; color: root.secondary }
@@ -806,7 +809,7 @@ Item {
             anchors.centerIn: parent; width: parent.width - 32
             horizontalAlignment: Text.AlignHCenter
             visible: !root.gridActive && root.results.length === 0
-            text: root.searching ? "Dateien werden gesucht …" : root.searchError ? "Dateisuche nicht verfügbar" : root.commandMode ? "Befehl nach > eingeben" : root.filter === "calc" ? "Rechnung eingeben, z. B. 125 × 1,19" : root.filter === "file" && root.query.trim().length < 2 ? "Mindestens zwei Zeichen eingeben" : "Keine Treffer"
+            text: root.searching ? "Searching files …" : root.searchError ? "File search unavailable" : root.commandMode ? "Type a command after >" : root.filter === "calc" ? "Enter a calculation, e.g. 125 × 1.19" : root.filter === "file" && root.query.trim().length < 2 ? "Type at least two characters" : "No results"
             color: root.secondary
           }
         }
@@ -819,8 +822,8 @@ Item {
             x: 14; anchors.verticalCenter: parent.verticalCenter
             width: Math.max(0,parent.width - (actionsButton.visible ? actionsButton.width : 0) - (hiddenButton.visible ? hiddenButton.width + 8 : 0) - 40)
             visible: !root.actionsOpen && width > 100
-            font.pixelSize: 11; color: root.secondary
-            text: root.hiddenOpen ? "↑↓ Auswählen    ↵ Einblenden    Esc Zurück" : root.searching ? "Dateien werden gesucht …" : root.searchError ? "Dateisuche nicht verfügbar · Apps bleiben nutzbar" : root.gridActive ? "Pfeiltasten Auswählen    ↵ Öffnen    Strg + ←/→ Filter" : "↑↓ Auswählen    ↵ Öffnen    Strg + ←/→ Filter"
+            font.pixelSize: 11; font.family: root.monoFont; color: root.secondary
+            text: root.hiddenOpen ? "↑↓ Select    ↵ Unhide    Esc Back" : root.searching ? "Searching files …" : root.searchError ? "File search unavailable · Apps still available" : root.gridActive ? "Arrows Select    ↵ Open    Ctrl + ←/→ Filter" : "↑↓ Select    ↵ Open    Ctrl + ←/→ Filter"
           }
           Rectangle {
             id: hiddenButton
@@ -828,7 +831,7 @@ Item {
             anchors.right: actionsButton.left; anchors.rightMargin: 8; anchors.verticalCenter: parent.verticalCenter
             width: Math.min(144,Math.max(112,parent.width - 122)); height: 24; radius: Visual.radiusControl
             color: hiddenMouse.containsMouse ? root.selection : "transparent"
-            Label { anchors.centerIn: parent; text: "Ausgeblendet  Strg+H"; font.pixelSize: 12 }
+            Label { anchors.centerIn: parent; text: "Hidden  Ctrl+H"; font.pixelSize: 12 }
             MouseArea { id: hiddenMouse; anchors.fill: parent; hoverEnabled: true; onClicked: root.showHiddenApps() }
           }
           Rectangle {
@@ -837,7 +840,7 @@ Item {
             anchors.right: parent.right; anchors.rightMargin: 10; anchors.verticalCenter: parent.verticalCenter
             width: 96; height: 24; radius: Visual.radiusControl
             color: actionsMouse.containsMouse ? root.selection : "transparent"
-            Label { anchors.centerIn: parent; text: "Aktionen   ⇥"; font.pixelSize: 12 }
+            Label { anchors.centerIn: parent; text: "Actions   ⇥"; font.pixelSize: 12 }
             MouseArea { id: actionsMouse; anchors.fill: parent; hoverEnabled: true; onClicked: root.cycleAction(1) }
           }
           ListView {

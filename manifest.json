@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "olauncher",
   "name": "OLauncher",
-  "version": "1.0",
+  "version": "1.1.0",
   "author": "marco",
   "description": "A liquid app launcher with animated most-used apps, unified app/file search, calculator and contextual actions.",
   "kinds": [

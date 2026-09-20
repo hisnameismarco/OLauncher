@@ -39,11 +39,13 @@ Item {
     ink: root.ink
     icons: root.app.preview || []
     scale: root.opticalScale
+    transform: Translate { y: mouse.containsMouse && !mouse.pressed ? -2 : 0; Behavior on y { NumberAnimation { duration: Visual.fast; easing.type: Easing.OutCubic } } }
     Behavior on scale { NumberAnimation { duration: Visual.fast; easing.type: Easing.OutCubic } }
   }
   Image {
     id: appIcon
     scale: root.opticalScale
+    transform: Translate { y: mouse.containsMouse && !mouse.pressed ? -2 : 0; Behavior on y { NumberAnimation { duration: Visual.fast; easing.type: Easing.OutCubic } } }
     Behavior on scale { NumberAnimation { duration: Visual.fast; easing.type: Easing.OutCubic } }
     visible: root.app.kind !== "folder"
     anchors.horizontalCenter: parent.horizontalCenter

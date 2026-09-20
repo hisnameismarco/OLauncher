@@ -84,7 +84,7 @@ function fixture() {
 }
 {
   const {root} = fixture();
-  assert.equal(root.calculate('125*1,19'),'148,75');
+  assert.equal(root.calculate('125*1,19'),'148.75');
   assert.equal(root.calculate('200*15%'),'30');
   assert.equal(root.calculate('1/0'),null);
   root.quickOpen=true; root.query='hello'; root.refresh();

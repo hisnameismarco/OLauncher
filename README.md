@@ -4,7 +4,14 @@ A Spotlight-style launcher for Omarchy with unified app/file search, a calculato
 
 ![OLauncher demo: most-used apps, App Grid, folders, hidden apps and search](media/preview.gif)
 
-[Watch or download the 26-second demo (MP4)](https://github.com/hisnameismarco/OLauncher/releases/download/v1.0/olauncher-v1.0-demo.mp4). Recorded with isolated demo data on a neutral background.
+[Watch or download the v1.1.0 demo (MP4)](https://github.com/hisnameismarco/OLauncher/releases/download/v1.1.0/olauncher-v1.1.0-demo.mp4). Recorded with isolated demo data on a neutral background.
+
+## Version 1.1.0
+
+- Coordinated frosted-glass styling with [ODock](https://github.com/hisnameismarco/odock): 24 px outer corners, softer light edges and shadows, and an 85% opaque launcher surface.
+- System sans-serif UI text, quiet hover highlights and a small icon lift.
+- English interface and decimal point calculator output; decimal comma input remains supported.
+- Existing app order, folders, hidden apps and usage history are preserved.
 
 ## Features
 
@@ -15,19 +22,19 @@ A Spotlight-style launcher for Omarchy with unified app/file search, a calculato
 - The empty **Apps** filter opens a compact, scrollable grid with manual ordering, folders, and reversible hidden apps. Typing returns immediately to search.
 - Golden Gate / Liquid Glass inspired styling follows Omarchy's theme and remains readable without compositor blur.
 - Search applications, filenames and arithmetic together. Filters: All, Apps, Files, Calculator.
-- Decimal comma, multiplication/division symbols, powers and postfix percentages: `125*1,19` → `148,75`.
+- Decimal comma, multiplication/division symbols, powers and postfix percentages: `125*1,19` → `148.75` (decimal point output).
 - Contextual actions: open, open containing folder, copy path/name/result.
 - Commands run only with an explicit `>` prefix and activation.
 - Cancelled requests cannot overwrite results for a newer query. File searches time out after 8 seconds.
 
-The current interface language is German. This is an independent Linux launcher inspired by Spotlight, not an Apple product or a pixel-exact macOS implementation.
+The interface defaults to English, including actions, hints, folder controls and empty/error states. This is an independent Linux launcher inspired by Spotlight, not an Apple product or a pixel-exact macOS implementation.
 
 ## Requirements
 
 - Omarchy **Quattro shell / plugin API v1**, Quickshell with Qt 6 Quick Effects, Hyprland.
 - `python3`, `fd`, `wl-copy` (wl-clipboard), `xdg-open` (xdg-utils), `gtk-launch` (gtk3) and `uwsm`.
 - Node.js is only needed to run the developer tests.
-- Uses Omarchy’s configured font and popup theme colors. No Apple fonts or icons are bundled. App icons come from the user’s icon theme.
+- Uses the system sans-serif font for the interface, Omarchy’s configured font for commands and keyboard hints, and Omarchy’s popup theme colors. No Apple fonts or icons are bundled. App icons come from the user’s icon theme.
 
 ## Install
 

@@ -161,7 +161,7 @@ Item {
     z: 3
     x: Math.max(0, Math.min(root.width - width, root.dragPosition.x - width / 2))
     y: root.dragPosition.y + 44
-    text: root.dropMode === "folder-add" ? "In Ordner verschieben" : "Ordner erstellen"
+    text: root.dropMode === "folder-add" ? "Move into folder" : "Create folder"
     color: root.ink
     font.family: root.uiFont
     font.pixelSize: 12
@@ -194,7 +194,7 @@ Item {
   Text {
     anchors.centerIn: parent
     visible: root.apps.length === 0
-    text: "Keine Programme"
+    text: "No applications"
     color: root.ink
     font.family: root.uiFont
     font.pixelSize: 14

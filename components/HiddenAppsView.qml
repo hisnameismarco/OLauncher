@@ -11,7 +11,7 @@ Item {
   required property string uiFont
   readonly property var rows: apps.map(function(app) {
     return {key:"app:" + app.appId,appId:app.appId,title:app.title,icon:app.icon,all:false}
-  }).concat(totalHidden ? [{key:"action:restore-all",title:"Alle einblenden",icon:"",all:true}] : [])
+  }).concat(totalHidden ? [{key:"action:restore-all",title:"Unhide all",icon:"",all:true}] : [])
   readonly property real preferredHeight: 42 + Math.max(76,rows.length * 48)
   property int selectedIndex: -1
   property string selectedKey: ""
@@ -47,7 +47,7 @@ Item {
   }
   Text {
     x: 44; y: 8; width: parent.width - 52
-    text: "Ausgeblendete Apps"
+    text: "Hidden apps"
     color: root.ink; font.family: root.uiFont; font.pixelSize: 15
     elide: Text.ElideRight
   }
@@ -87,7 +87,7 @@ Item {
       }
       Text {
         anchors.right: parent.right; anchors.rightMargin: 12; anchors.verticalCenter: parent.verticalCenter
-        text: modelData.all ? "↵" : "Einblenden"
+        text: modelData.all ? "↵" : "Unhide"
         color: root.ink; font.family: root.uiFont; font.pixelSize: 12
       }
       MouseArea {
@@ -100,7 +100,7 @@ Item {
   Text {
     anchors.centerIn: list
     visible: root.rows.length === 0
-    text: "Keine ausgeblendeten Apps"
+    text: "No hidden apps"
     opacity: 0.68
     color: root.ink; font.family: root.uiFont; font.pixelSize: 14
   }
