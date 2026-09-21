@@ -18,7 +18,7 @@ equal(G.move(5,10,2,'up'),3);
 equal(G.move(99,10,4,'left'),8);
 equal(G.move(0,300,4,'pageDown'),12);
 equal(G.move(299,300,4,'pageUp'),287);
-for (const [width, columns] of [[0,1],[80,1],[208,2],[320,3],[664,6]]) equal(G.columnsForWidth(width),columns);
+for (const [width, columns] of [[0,1],[80,1],[208,2],[320,3],[562,5],[664,5],[1200,5]]) equal(G.columnsForWidth(width),columns);
 for (const value of [undefined,null,'','invalid','[]','null','1','true','{}','{"filter":"app"}','{"filter":"unknown"}',[],42,{}, {filter:42}]) equal(G.payloadFilter(value),'all');
 equal(G.payloadFilter('{"filter":"apps"}'),'app');
 equal(G.payloadFilter({filter:'apps'}),'app');

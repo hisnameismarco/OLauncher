@@ -19,10 +19,10 @@ Item {
   readonly property var appLibrary: root.shell ? root.shell.appLibrary : null
   readonly property color ink: Color.popups.text
   readonly property color material: Color.popups.background
-  readonly property color quiet: Visual.alpha(ink,0.07)
+  readonly property color quiet: Visual.alpha(Color.accent,0.10)
   readonly property color secondary: Visual.alpha(ink,0.68)
-  readonly property color selection: Visual.alpha(ink,0.13)
-  readonly property string uiFont: "sans-serif"
+  readonly property color selection: Visual.alpha(Color.accent,0.18)
+  readonly property string uiFont: Style.font.family
   readonly property string monoFont: Style.font.resolvedFamily
   property bool opened: false
   property string query: ""
@@ -77,7 +77,9 @@ Item {
        {key:"copy", label:current.kind === "app" ? "Copy name" : current.kind === "cmd" ? "Copy command" : "Copy result"}]) : []
   readonly property var filters: [{key:"all",label:"All"}, {key:"app",label:"Apps"}, {key:"file",label:"Files"}, {key:"calc",label:"Calculator"}]
   property real windowProgress: opened ? 1 : 0
-  Behavior on windowProgress { NumberAnimation { duration: root.opened ? 210 : 160; easing.type: Easing.OutCubic } }
+  readonly property int barHeight: 52
+  readonly property real motionOffset: 100
+  Behavior on windowProgress { NumberAnimation { duration: root.opened ? 240 : 180; easing.type: root.opened ? Easing.OutCubic : Easing.InCubic } }
 
   function open(payload) {
     root.hiddenOpen = false
@@ -516,13 +518,17 @@ Item {
 
     Item {
       id: surface
-      width: Math.min(680, panel.width - 32)
-      height: 66 + (root.expanded ? 40 + body.height + footer.height + 12 : 0)
+      width: Math.min(578, panel.width - 32)
+      height: root.barHeight + (root.expanded ? 40 + body.height + footer.height + 12 : 0)
       anchors.horizontalCenter: parent.horizontalCenter
       y: Math.max(16, panel.height * 0.20 - 32) - 8 * (1 - root.windowProgress)
       opacity: root.windowProgress
       scale: 0.97 + root.windowProgress * 0.03
       transformOrigin: Item.Top
+      transform: Translate {
+        id: openCloseTranslate
+        x: -root.motionOffset * (1 - root.windowProgress)
+      }
       Behavior on height { NumberAnimation { duration: Visual.normal; easing.type: Easing.OutCubic } }
       Rectangle {
         anchors.fill: parent
@@ -544,38 +550,28 @@ Item {
           x: parent.radius; y: 1; width: parent.width - 2 * x; height: 1
           color: Visual.alpha("#ffffff",0.16)
         }
-        layer.enabled: true
-        layer.effect: MultiEffect {
-          shadowEnabled: true
-          shadowColor: Visual.shadowColor
-          shadowBlur: Visual.shadowBlur
-          shadowVerticalOffset: Visual.shadowOffset
-        }
       }
       MorphSurface {
         id: morph
         visible: !root.expanded
         x: -18; y: -18
-        width: surface.width + 36; height: 102
+        width: surface.width + 36; height: root.barHeight + 36
         railProgress: root.railProgress
         mainLeft: 18
         collapsedMainWidth: surface.width
         expandedMainWidth: surface.width - root.quickApps.length * (buttonDiameter + buttonGap)
-        shapeCenterY: 51
-        shapeHeight: 66
+        shapeCenterY: 18 + root.barHeight / 2
+        shapeHeight: root.barHeight
         mainCornerRadius: Visual.radiusOuter
         buttonCount: root.quickApps.length
-        buttonDiameter: Math.min(64, Math.max(28, (surface.width - 180) / 4 - 10))
+        buttonDiameter: Math.min(root.barHeight - 2, Math.max(28, (surface.width - 180) / 4 - 10))
         buttonGap: 10
         blurEdgeInset: 2
         surfaceColor: Visual.alpha(root.material,Visual.surfaceOpacity)
-        shadowColor: Visual.shadowColor
-        shadowBlur: Visual.shadowBlur
-        shadowVerticalOffset: Visual.shadowOffset
       }
       MouseArea { anchors.fill: parent }
       Canvas {
-        x: 20; y: 23; width: 22; height: 22
+        x: 20; y: Math.round((root.barHeight - 22) / 2); width: 22; height: 22
         visible: !root.commandMode
         property color stroke: root.secondary
         onStrokeChanged: requestPaint()
@@ -590,14 +586,14 @@ Item {
         }
       }
       Label {
-        x: 21; y: 19; width: 24; height: 28
+        x: 21; y: Math.round((root.barHeight - 28) / 2); width: 24; height: 28
         visible: root.commandMode
         text: ">"; font.pixelSize: 26; color: root.secondary
       }
       TextInput {
         id: input
         x: 52; y: 0
-        width: (root.expanded ? surface.width : morph.mainWidth) - 110; height: 66
+        width: (root.expanded ? surface.width : morph.mainWidth) - 110; height: root.barHeight
         verticalAlignment: TextInput.AlignVCenter
         clip: true
         selectByMouse: true
@@ -620,7 +616,7 @@ Item {
         }
       }
       Rectangle {
-        anchors.right: parent.right; anchors.rightMargin: 20; y: 21
+        anchors.right: parent.right; anchors.rightMargin: 20; y: Math.round((root.barHeight - 25) / 2)
         width: 25; height: 25; radius: 13
         visible: root.query.length > 0
         color: clearMouse.containsMouse ? root.selection : root.quiet
@@ -628,7 +624,7 @@ Item {
         MouseArea { id: clearMouse; anchors.fill: parent; hoverEnabled: true; onClicked: { root.query = ""; input.forceActiveFocus() } }
       }
       Rectangle {
-        x: morph.mainWidth - 82; y: 21
+        x: morph.mainWidth - 82; y: Math.round((root.barHeight - 25) / 2)
         width: 64; height: 25; radius: 9
         visible: !root.expanded && !root.quickOpen && root.railProgress < 0.01 && root.quickApps.length > 0
         color: quickHintMouse.containsMouse ? root.selection : root.quiet
@@ -644,7 +640,7 @@ Item {
           readonly property real reveal: morph.iconProgress(index)
           visible: !root.expanded
           x: morph.x + morph.buttonCenterX(index) - width / 2
-          y: (66 - height) / 2
+          y: (root.barHeight - height) / 2
           width: morph.buttonDiameter; height: width
           opacity: reveal
           scale: 0.9 + reveal * 0.1
@@ -688,7 +684,7 @@ Item {
       Item {
         id: content
         visible: root.expanded
-        x: 8; y: 66; width: parent.width - 16
+        x: 8; y: root.barHeight; width: parent.width - 16
         height: filtersRow.height + body.height + footer.height
         Rectangle { x: 14; width: parent.width - 28; height: 1; color: Visual.alpha(root.ink,0.10) }
         Row {

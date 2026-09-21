@@ -24,7 +24,7 @@ Item {
   property int markerIndex: -1
   property bool markerAfter: false
   readonly property int columns: GridNavigation.columnsForWidth(width)
-  readonly property real preferredHeight: Math.max(76, Math.ceil(apps.length / columns) * grid.cellHeight)
+  readonly property real preferredHeight: Math.max(100, Math.ceil(apps.length / columns) * grid.cellHeight)
   signal activated(string appId)
   signal reordered(string appId, int targetIndex)
   signal dragSelected(string appId)
@@ -109,7 +109,7 @@ Item {
     clip: true
     model: root.apps
     cellWidth: width / root.columns
-    cellHeight: 88
+    cellHeight: 100
     boundsBehavior: Flickable.StopAtBounds
     currentIndex: root.selectedIndex
     keyNavigationEnabled: false
@@ -183,6 +183,7 @@ Item {
     y: Math.max(0,root.dragPosition.y - height / 2)
     width: 58; height: 58
     showLabel: false
+    artSize: 42
     app: root.draggedApp || {title:"", icon:""}
     selected: true
     ink: root.ink

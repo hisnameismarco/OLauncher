@@ -17,9 +17,9 @@ Rectangle {
       model: root.icons.slice(0,4)
       Image {
         required property string modelData
-        width: 14; height: 14
+        width: Math.round(root.width * 0.34); height: width
         source: modelData
-        sourceSize.width: 28; sourceSize.height: 28
+        sourceSize.width: width * 2; sourceSize.height: height * 2
         fillMode: Image.PreserveAspectFit
       }
     }

@@ -12,6 +12,8 @@ Item {
   property bool reorderEnabled: true
   property bool dragged: false
   property bool showLabel: true
+  property int artSize: 56
+  readonly property real artY: Math.max(6, Math.round((height - artSize) / 2))
   signal activated()
   signal contextRequested()
   signal dragStarted(point position)
@@ -34,7 +36,7 @@ Item {
   }
   AppFolderItem {
     anchors.horizontalCenter: parent.horizontalCenter
-    y: 10; width: 38; height: 38
+    y: root.artY; width: root.artSize; height: root.artSize
     visible: root.app.kind === "folder"
     ink: root.ink
     icons: root.app.preview || []
@@ -49,25 +51,25 @@ Item {
     Behavior on scale { NumberAnimation { duration: Visual.fast; easing.type: Easing.OutCubic } }
     visible: root.app.kind !== "folder"
     anchors.horizontalCenter: parent.horizontalCenter
-    y: 10
-    width: 38; height: 38
+    y: root.artY
+    width: root.artSize; height: root.artSize
     source: root.app.icon || ""
-    sourceSize.width: 76; sourceSize.height: 76
+    sourceSize.width: root.artSize * 2; sourceSize.height: root.artSize * 2
     fillMode: Image.PreserveAspectFit
   }
   Rectangle {
     anchors.horizontalCenter: parent.horizontalCenter
-    y: 10; width: 38; height: 38; radius: Visual.radiusControl
+    y: root.artY; width: root.artSize; height: root.artSize; radius: Visual.radiusControl
     visible: root.app.kind !== "folder" && (appIcon.status === Image.Error || appIcon.status === Image.Null)
     color: Visual.alpha(root.ink,0.08)
     Text {
       anchors.centerIn: parent; text: "▦"; color: root.ink
-      font.family: root.uiFont; font.pixelSize: 22
+      font.family: root.uiFont; font.pixelSize: Math.round(root.artSize * 0.4)
     }
   }
   Text {
-    visible: root.showLabel
-    x: 8; y: 56
+    visible: root.showLabel && mouse.containsMouse
+    x: 8; y: root.artY + root.artSize + 2
     width: parent.width - 16
     text: root.app.title
     textFormat: Text.PlainText

@@ -11,7 +11,7 @@ function payloadFilter(payload) {
 }
 
 function columnsForWidth(width) {
-  return Math.max(1, Math.floor(width / 104))
+  return Math.max(1, Math.min(5, Math.floor(width / 104)))
 }
 
 function compareApps(a, b) {

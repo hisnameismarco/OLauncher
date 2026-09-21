@@ -144,11 +144,8 @@ Item {
         anchors.fill: surfaceSource
         source: surfaceSource
         opacity: root.surfaceColor.a
-        autoPaddingEnabled: true
-        shadowEnabled: true
-        shadowColor: root.shadowColor
-        shadowBlur: root.shadowBlur
-        shadowVerticalOffset: root.shadowVerticalOffset
+        autoPaddingEnabled: false
+        shadowEnabled: false
         shadowHorizontalOffset: 0
     }
 }

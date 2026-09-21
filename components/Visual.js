@@ -4,8 +4,8 @@
 // Internal material/motion vocabulary; colors are supplied by Omarchy's theme.
 var fast = 140
 var normal = 200
-var radiusOuter = 24
-var radiusPanel = 18
+var radiusOuter = 16
+var radiusPanel = 12
 var radiusControl = 10
 var radiusItem = 12
 var surfaceOpacity = 0.85
